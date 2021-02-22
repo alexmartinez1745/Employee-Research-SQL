@@ -1,3 +1,5 @@
+-- Data Engineering (creating tables)
+
 -- Create table for employees with the emp. number as primary key
 CREATE TABLE employees(
 	emp_no INT PRIMARY KEY,
@@ -10,4 +12,35 @@ CREATE TABLE employees(
 ); 
 -- Display to see if import of csv was successful
 SELECT * FROM employees
+LIMIT 10;
+
+-- Create table for departments with the dept. number as primary key
+CREATE TABLE departments (
+	dept_no TEXT PRIMARY KEY,
+	dept_name TEXT
+);
+-- Display to see if import of csv was successful
+SELECT * FROM departments
+LIMIT 10;
+
+-- Create table for managers using references to parent tables
+CREATE TABLE dept_manager(
+	dept_no TEXT,
+	emp_no INT,
+	FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
+	FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
+);
+-- Display to see if import of csv was successful
+SELECT * FROM dept_manager
+LIMIT 10;
+
+-- Create a new table for employees using references to parent tables
+CREATE TABLE dept_employee(
+	emp_no INT,
+	dept_no TEXT,
+	FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
+	FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
+);
+-- Display to see if import of csv was successful
+SELECT * FROM dept_employee
 LIMIT 10;
