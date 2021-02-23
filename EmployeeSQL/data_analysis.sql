@@ -17,11 +17,22 @@ ORDER BY hire_date ASC;
 
 -- 3. List the manager of each department with the following information: 
 -- department number, department name, the manager's employee number, last name, first name.
-SELECT d.dept_no, d.dept_name, m.emp_no, e.last_name, e.first_name
+SELECT d.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
 FROM departments d
-JOIN dept_manager m
+JOIN dept_manager dm
 ON
-(d.dept_no = m.dept_no)
+(d.dept_no = dm.dept_no)
 JOIN employees e
 ON
-(m.emp_no = e.emp_no)
+(dm.emp_no = e.emp_no)
+
+-- 4. List the department of each employee with the following information:
+-- employee number, last name, first name, and department name.
+SELECT de.emp_no, e.last_name, e.first_name, d.dept_name
+FROM dept_employee de
+JOIN departments d
+ON
+(de.dept_no = d.dept_no)
+JOIN employees e
+ON
+(de.emp_no = e.emp_no)
